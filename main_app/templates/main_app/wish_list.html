@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>WISH LIST</h1>
+
+<table class="pure-table pure-table-striped">
+    <th>
+      Discription: 
+    </th>
+    <th>
+        Delete:
+    </th>
+    {% for w in wish_list %}
+    <tr>
+        <td>Wish Description: {{ w.description }}</td>
+        <td>
+            <form action="{% url 'wish_delete' w.id %}" method="POST">
+                {% csrf_token %}
+                <button id="redx" class="pure-button" type="submit">X</button>
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    <h3>No Wishies Yet</h3>
+    {% endfor %}
+    <hr>
+</table>
+
+<a class="pure-button" href="{% url 'wish_create' %}">ADD WISH</a>
+
+{% endblock %}
